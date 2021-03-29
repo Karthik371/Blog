@@ -1,0 +1,107 @@
+<!-- @format -->
+
+<%- include("./partials/header.ejs") -%> 
+
+    <div class="container">
+      <div class="contents">
+        <div class="nav-bar">
+          <div class="brand">
+            <h2>Blog Post's</h2>
+       <div  class="error-div animate__animated animate__fadeIn">
+         
+        <p class="errors" ><%=errors%> </p>
+       </div>
+      
+           
+          </div>
+         
+        </div>
+        <div class="side-bar">
+          <div class="ham" >
+            <img class="navbar-anima" src="../images/menu.svg" alt="er">
+          </div>
+
+          <div class="side-bar-items">
+                    <a href="/posts"> 
+            <button> Create Posts </button> </a>
+          </div>
+         
+          <div class="users">
+            <h2>Today's Posts by</h2>
+            <div class="user-names">
+              
+              <%  posts.forEach(post => { %>
+                <div class="user-name">
+                  <p><%=post.name%></p>
+                </div>
+            <% }) %>
+            
+             
+              </div>
+            </div>
+            <div class="logout" >
+              <% if(typeof posts != "undefined"){ %>
+                <a href="/user/logout">  <button>  Logout   </button> </a>
+              <%} else{ %>
+                <a href="/">  <button> Goback   </button> </a>
+            <% } %>
+              
+             
+            </div>
+          </div>
+        </div>
+        <div class="user-posts">
+     
+            <% if(typeof posts != "undefined"){ %>
+           
+            <%} else { %>
+             
+                   <div class="alert-message" > 
+                    <%- include("./partials/error.ejs") %>
+                  </div>
+            <% } %>
+         
+          <% if(typeof posts != "undefined"){ %>
+          <% posts.forEach(element => { %>
+            <div class="users-posts-margin">
+              <div class="style">
+               <img src="uploads/<%=element.img%>"  alt="e"/>
+              </div>
+              <div class="posts-rectangle">
+                
+                <div class="posts-user-name">
+                  <h4> <%=element.name%></h4>
+                  <p><%=element.year%></p>
+                 
+                </div>
+                <div class="users-post">
+                  <p>
+                  <%=element.post.substring(0,20)  %>
+               <a href=<%="/user/post/"+element._id%> class="anchor"> Read more ..</a>     
+                </p>
+                  
+                </div>
+                
+                <div class="icons" >
+                  <div class="edit" ><a href=<%="/edit/"+element._id%>  > <i class="far fa-edit"></i> </a>
+                 
+                  </div>
+                  <div class="delete-icon" >
+                    <a href=<%="/delete/"+element._id%>  > <i class="fas fa-trash"></i></a>
+                   
+                  </div>
+                </div>
+              </div>
+            </div>
+        <% }) %>
+        <% } %> 
+            
+       
+          
+          
+          
+        </div>
+      </div>
+    </div>
+
+<%- include("./partials/footer.ejs") -%> 
